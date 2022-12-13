@@ -3,7 +3,6 @@
  * defines shape of the documents in comment
  */
 import mongoose, { Schema } from "mongoose";
-import Comment from "../../models/comments/Comment";
 
 const CommentSchema = new mongoose.Schema<Comment>(
     {

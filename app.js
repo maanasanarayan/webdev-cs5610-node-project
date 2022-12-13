@@ -1,10 +1,10 @@
-import mongoose from "mongoose"
 import express from 'express'
 import cors from 'cors'
 import LikesController from "./likes/likes-controller";
 import UsersController from "./users/users-controller";
 import StockController from "./stocks/stock-controller";
 import CommentsController from "./comments/comments-controller"
+import mongoose from "mongoose";
 
 const options = {
     useNewUrlParser: true,

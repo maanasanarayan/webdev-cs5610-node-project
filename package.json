@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "software-engineering-node",
   "version": "1.0.0",
   "description": "",
