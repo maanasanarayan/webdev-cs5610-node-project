@@ -17,29 +17,31 @@ const UsersController = (app) => {
     const deleteUser = () => {}
 
     const register = async (req, res) => {
+        console.log("in register");
         const user = req.body;
         const existingUser = await userDao
-            .findUserByUsername(user.username)
+            .findUserByUsername(user.email)
         if(existingUser) {
-            res.sendStatus(403)
-            return
+            res.sendStatus(403).send({message:"Duplicate Email"})
+            return;
         }
         const currentUser = await userDao.createUser(user)
-        req.session['currentUser'] = currentUser
-        res.json(currentUser)
+        // req.session['currentUser'] = currentUser
+
+        res.status(200).send({message:"Success",userDetail:currentUser})
     }
 
     const login = async (req, res) => {
         const credentials = req.body
         const existingUser = await userDao
             .findUserByCredentials(
-                credentials.username, credentials.password)
+                credentials.email, credentials.password)
         if(existingUser) {
-            req.session['currentUser'] = existingUser
-            res.json(existingUser)
+            res.status(200).send({message:"Logged In",userDetail:existingUser})
             return
         }
-        res.sendStatus(403)
+        else
+            res.send({message:"E-mail and Password combination is not valid!",userDetail:existingUser})
     }
 
     const logout = (req, res) => {

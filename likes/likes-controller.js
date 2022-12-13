@@ -53,7 +53,7 @@ const LikesController = (app) => {
     }
 
     app.post('/users/likes/:sid', userLikesStock)
-    app.delete('/users/unlikes/:sid', userUnlikesStock())
+    app.delete('/users/unlikes/:sid', userUnlikesStock)
     app.get('/likes', findAllLikes)
     app.get('/users/:uid/likes', findStocksLikedByUser)
     app.get('/movies/:sid/likes', findUsersThatLikeStock)

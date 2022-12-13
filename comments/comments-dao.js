@@ -1,4 +1,4 @@
-import CommentModel from "./comments-model";
+import CommentModel from "./comments-model.js";
 
 
 export const getComments = async (sid) => {

@@ -1,4 +1,4 @@
-import * as commentDao from "./comments-dao";
+import * as commentDao from "./comments-dao.js";
 const CommentsController = (app) => {
 
     const getComments = async (req, res) => {

@@ -1,10 +1,10 @@
 import mongoose from "mongoose"
 import express from 'express'
 import cors from 'cors'
-import LikesController from "./likes/likes-controller";
-import UsersController from "./users/users-controller";
-import StockController from "./stocks/stock-controller";
-import CommentsController from "./comments/comments-controller"
+import LikesController from "./likes/likes-controller.js";
+import UsersController from "./users/users-controller.js";
+import StockController from "./stocks/stock-controller.js";
+import CommentsController from "./comments/comments-controller.js"
 
 const options = {
     useNewUrlParser: true,
@@ -26,3 +26,4 @@ LikesController(app)
 UsersController(app)
 CommentsController(app)
 app.listen(4000)
+console.log("Listening at 4000")

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import stockSchema from "./stocks-schema";
+import stockSchema from "./stocks-schema.js";
 
 const stocksModel = mongoose.model('StocksModel', stockSchema)
 
