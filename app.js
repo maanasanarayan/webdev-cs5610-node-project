@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
-import LikesController from "./likes/likes-controller";
-import UsersController from "./users/users-controller";
-import StockController from "./stocks/stock-controller";
-import CommentsController from "./comments/comments-controller"
+import LikesController from "./likes/likes-controller.js";
+import UsersController from "./users/users-controller.js";
+import StockController from "./stocks/stock-controller.js";
+import CommentsController from "./comments/comments-controller.js"
 import mongoose from "mongoose";
 
 const options = {
