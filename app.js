@@ -4,6 +4,7 @@ import cors from 'cors'
 import LikesController from "./likes/likes-controller";
 import UsersController from "./users/users-controller";
 import StockController from "./stocks/stock-controller";
+import CommentsController from "./comments/comments-controller"
 
 const options = {
     useNewUrlParser: true,
@@ -23,4 +24,5 @@ app.use(express.json())
 StockController(app)
 LikesController(app)
 UsersController(app)
+CommentsController(app)
 app.listen(4000)
