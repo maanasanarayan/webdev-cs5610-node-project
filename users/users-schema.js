@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const UserDetailsScehma = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     fname: String,
     lname: String,
@@ -17,4 +17,4 @@ const UserDetailsScehma = new mongoose.Schema(
   }
 );
 
-mongoose.model("UserInfo", UserDetailsScehma);
+export default userSchema
