@@ -22,7 +22,7 @@ const UsersController = (app) => {
         const existingUser = await userDao
             .findUserByUsername(user.email)
         if(existingUser) {
-            res.sendStatus(403).send({message:"Duplicate Email"})
+            res.send({message:"Duplicate Email"})
             return;
         }
         const currentUser = await userDao.createUser(user)
@@ -73,7 +73,7 @@ const UsersController = (app) => {
     app.put('/users/:uid', updateUser)
     app.delete('/users/:uid', deleteUser)
 
-    app.post('/register', register)
+    app.post('/sign-up', register)
     app.post('/login', login)
     app.post('/logout', logout)
     app.post('/profile', profile)
