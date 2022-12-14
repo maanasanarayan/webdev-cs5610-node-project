@@ -22,7 +22,7 @@ const UsersController = (app) => {
         const existingUser = await userDao
             .findUserByUsername(user.email)
         if(existingUser) {
-            res.sendStatus(403).send({message:"Duplicate Email"})
+            res.send({message:"Duplicate Email"})
             return;
         }
         const currentUser = await userDao.createUser(user)

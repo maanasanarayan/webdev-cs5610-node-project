@@ -10,7 +10,7 @@ const usersSchema = mongoose.Schema({
     phonenumber:String,
     dob:String,
     gender:String,
-    role: {type: String, enum: ['INDUSTRY', 'TRADER', 'admin']}
+    role: {type: String, enum: ['INDUSTRY', 'TRADER', 'ADMIN']}
 }, {collection: 'users'})
 
 export default usersSchema
