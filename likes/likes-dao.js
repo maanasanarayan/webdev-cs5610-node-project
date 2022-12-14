@@ -19,3 +19,10 @@ export const findUsersThatLikeStock = async(mid) => {
 }
 export const findAllLikes = async () =>
     await likesModel.find()
+
+export const findUserLikesStock = async (uid, sid) =>
+    likesModel.findOne(
+        {stock: sid, likedBy: uid});
+
+export const countHowManyLikes = async (sid) =>
+    likesModel.count({stock: sid});

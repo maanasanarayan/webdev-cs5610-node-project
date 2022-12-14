@@ -19,7 +19,7 @@ const options = {
 mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
 
 const app = express();
-app.use(cors())
+app.use(cors({credentials: false, origin: 'http://localhost:3000'}))
 app.use(express.json())
 StockController(app)
 LikesController(app)

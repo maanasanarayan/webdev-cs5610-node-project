@@ -67,10 +67,10 @@ const CommentsController = (app) => {
         }
     }
 
-    app.get("comments/:sid", getComments)
-    app.post("comments/:uid/stocks/:sid", addComments)
-    app.put("comments/:uid/comment/:cid", updateComment)
-    app.delete("comments/:uid/comment/:cid", deleteComment)
+    app.get("/comments/:sid", getComments)
+    app.post("/comments/:uid/stocks/:sid", addComments)
+    app.put("/comments/:uid/comment/:cid", updateComment)
+    app.delete("/comments/:uid/comment/:cid", deleteComment)
 }
 
 export default CommentsController;
