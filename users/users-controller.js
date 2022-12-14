@@ -73,7 +73,7 @@ const UsersController = (app) => {
     app.put('/users/:uid', updateUser)
     app.delete('/users/:uid', deleteUser)
 
-    app.post('/register', register)
+    app.post('/sign-up', register)
     app.post('/login', login)
     app.post('/logout', logout)
     app.post('/profile', profile)
