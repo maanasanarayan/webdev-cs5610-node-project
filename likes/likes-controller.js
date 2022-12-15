@@ -1,23 +1,18 @@
-
 import * as likesDao from "./likes-dao.js";
-import {
-    countHowManyLikes,
-    findUserLikesStock,
-    findUsersThatLikeStock,
-    userLikesStock,
-    userUnlikesStock
-} from "./likes-dao.js";
+import {countHowManyLikes} from "./likes-dao.js";
+
 
 const LikesController = (app) => {
+    console.log("inside LikesController");
     const userLikesStock = async (req, res) => {
-        // const uid = req.params.uid
-        const uid = req.session['currentUser']._id
+         const uid = req.params.uid
         const sid = req.params.sid
 
         const newLike = await likesDao.userLikesStock(uid, sid)
         // likes.push(newLike)
         res.json(newLike)
     }
+
     const userUnlikesStock = async (req, res) => {
         const {uid, sid} = req.params
 
@@ -27,47 +22,43 @@ const LikesController = (app) => {
         res.send(status)
     }
     const findAllLikes = async (req, res) => {
-        const likes = await likesDao.findAllLikes()
-        res.json(likes)
+        try {
+            const likes = await likesDao.findAllLikes()
+            res.json(likes)
+        } catch (error) {
+            res.error(error);
+        }
+
     }
     const findStocksLikedByUser = async (req, res) => {
-        const uid = req.params.uid
-        const stocks = await likesDao.findStocksLikedByUser(uid)
-        res.json(stocks)
-        // const movies = likes.filter((like) => like.user === uid)
-        // const populatedMovies = populate({
-        //     rawResults: movies,
-        //     fieldToPopulate: 'movie',
-        //     sourceData: getMovies(),
-        //     sourceField: '_id'
-        // })
-        // res.json(populatedMovies)
+
+        try {
+            const uid = req.params.uid
+            const stocks = await likesDao.findStocksLikedByUser(uid)
+            res.json(stocks)
+        } catch (error) {
+            res.error(error)
+        }
+
     }
     const findUsersThatLikeStock = async (req, res) => {
-        const sid = req.params.sid
-        const users = await likesDao.findUsersThatLikeStock(sid)
-        res.json(users)
 
-        // const usersWhoLikeMovie = likes.filter((like) => like.movie === mid)
-        // const populateUsers = populate({
-        //     rawResults: usersWhoLikeMovie,
-        //     fieldToPopulate: 'user',
-        //     sourceData: users,
-        //     sourceField: '_id'
-        // })
-        // res.json(populateUsers)
+        try {
+            const sid = req.params.sid
+            const users = await likesDao.findUsersThatLikeStock(sid)
+            res.json(users)
+        } catch (error) {
+            res.error(error)
+        }
+
     }
 
     const userTogglesStockLikes = async (req, res) => {
-        const uid = req.params.uid;
+        const userId = req.params.uid;
         const sid = req.params.sid;
+        console.log("User has toggled like on front-end , the user is :", userId)
+        console.log("User has toggled like on front-end, the stock is :", sid)
         let stockLiked = false;
-        let profile = null;
-        if (req.session) {
-            profile = req.session['profile'];
-        }
-        const userId = uid === "me" && profile ?
-            profile._id : uid;
         try {
             const userAlreadyLikedStock = await likesDao
                 .findUserLikesStock(userId, sid);
@@ -82,26 +73,28 @@ const LikesController = (app) => {
             res.status(200).json({count: howManyLikedSong, userLiked: stockLiked});
         } catch (e) {
             console.log(e);
-            res.sendStatus(404);
+            res.sendStatus(403);
         }
     }
 
     const findUserLikesStock = (req, res) => {
-        const uid = req.params.uid;
-        let profile;
-        if (req.session) {
-            profile = req.session['profile'];
-        } else {
-            profile = null;
-        }
-        const userId = uid === "me" && profile ? profile._id : uid;
-
+        const userId = req.params.uid;
         likesDao.findUserLikesStock(userId, req.params.sid)
             .then(likes => res.json(likes))
             .catch(error => {
                 res.error(error)
-                throw error;
             })
+    }
+
+    const countHowManyLikesForStock = async (req, res) => {
+        const stockID = req.params.sid;
+
+        try {
+            const response = await likesDao.countHowManyLikes(stockID);
+            return response
+        } catch (error) {
+            res.error(error);
+        }
     }
 
     app.post('/users/likes/:sid', userLikesStock)
@@ -109,10 +102,12 @@ const LikesController = (app) => {
     app.get('/likes', findAllLikes)
     app.get('/users/:uid/likes', findStocksLikedByUser)
     app.get('/stocks/:sid/likes', findUsersThatLikeStock)
-    app.get('users/:uid/likes/:sid', userTogglesStockLikes)
-    app.get('stocks/:sid/likesCount', countHowManyLikes)
-    app.get('users/:uid/likes/:sid', findUserLikesStock)
+    app.put('/users/:uid/likes/:sid', userTogglesStockLikes)
+    app.get('/stocks/:sid/likesCount', countHowManyLikesForStock)
+    app.get('/users/:uid/likes/:sid', findUserLikesStock)
     // app.put(updateLike)
+
+    // /users/undefined/likes/639a8aa37a0972afb22c3c68
 }
 
 export default LikesController;

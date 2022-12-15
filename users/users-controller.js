@@ -40,6 +40,8 @@ const UsersController = (app) => {
       credentials.password
     );
     if (existingUser) {
+      console.log("Inside Login : Existing user is :", existingUser)
+      req.session['profile'] = existingUser;
       res.status(200).send({ message: "Logged In", userDetail: existingUser });
       return;
     } else
@@ -55,9 +57,11 @@ const UsersController = (app) => {
   };
 
   const profile = (req, res) => {
-    if (req.session["currentUser"]) {
-      res.send(req.session["currentUser"]);
+    console.log("The current user session is :", req.session)
+    if (req.session["profile"]) {
+      res.send(req.session["profile"]);
     } else {
+      //console.log("Inside the else. Request is :", req)
       res.sendStatus(403);
     }
   };
