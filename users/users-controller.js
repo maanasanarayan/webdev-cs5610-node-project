@@ -12,7 +12,20 @@ const UsersController = (app) => {
     const actualUser = await userDao.createUser(newUser);
     res.json(actualUser);
   };
-  const updateUser = () => {};
+  const updateUser = async(req,res) => {
+    console.log("in update");
+    const updatedUser= req.body.user;
+   
+    const existingUser = await userDao.findUserByUsername(updatedUser.email);
+    if(existingUser)
+    {
+      await userDao.updateUser(updatedUser.email,updatedUser)
+      res.status(201).send({message:"Updated User",updatedUser:updatedUser});
+    }
+    else 
+    res.send({message:"No User"});
+
+  };
   const deleteUser = async (req, res) => {
     const userToDelete = req.params.uid;
     const status = await userDao.deleteUser(userToDelete);
@@ -79,7 +92,7 @@ const UsersController = (app) => {
   app.get("/users", findAllUsers);
   app.get("/users/:uid", findUserById);
   app.post("/users", createUser);
-  app.put("/users/:uid", updateUser);
+  app.put("/users/update", updateUser);
   app.delete("/users/:uid", deleteUser);
 
   app.post("/sign-up", register);
