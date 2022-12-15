@@ -26,3 +26,9 @@ export const findUserLikesStock = async (uid, sid) =>
 
 export const countHowManyLikes = async (sid) =>
     likesModel.count({stock: sid});
+
+export const findAllStocksLikedByUser = async (uid) => {
+    const likedStocks = likesModel.find({likedBy: uid}).exec();
+    console.log("The liked stocks => " + likedStocks);
+    return likedStocks;
+}

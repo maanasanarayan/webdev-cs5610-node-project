@@ -26,7 +26,7 @@ const LikesController = (app) => {
             const likes = await likesDao.findAllLikes()
             res.json(likes)
         } catch (error) {
-            res.error(error);
+            res.json(error);
         }
 
     }
@@ -37,7 +37,7 @@ const LikesController = (app) => {
             const stocks = await likesDao.findStocksLikedByUser(uid)
             res.json(stocks)
         } catch (error) {
-            res.error(error)
+            res.json(error)
         }
 
     }
@@ -48,7 +48,7 @@ const LikesController = (app) => {
             const users = await likesDao.findUsersThatLikeStock(sid)
             res.json(users)
         } catch (error) {
-            res.error(error)
+            res.json(error)
         }
 
     }
@@ -82,7 +82,7 @@ const LikesController = (app) => {
         likesDao.findUserLikesStock(userId, req.params.sid)
             .then(likes => res.json(likes))
             .catch(error => {
-                res.error(error)
+                res.json(error)
             })
     }
 
@@ -93,8 +93,22 @@ const LikesController = (app) => {
             const response = await likesDao.countHowManyLikes(stockID);
             return response
         } catch (error) {
-            res.error(error);
+            res.json(error);
         }
+    }
+
+    const findAllStocksLikedByUser = async (req, res) => {
+        const uid = req.params.uid;
+        try {
+            const likes = await likesDao.findAllStocksLikedByUser(uid);
+            const likesNonNullStocks = likes.filter(like => like.stock);
+            const stocksFromLikes = likesNonNullStocks.map(like => like.stock);
+            console.log("The stocksFromLikes are :", stocksFromLikes);
+            res.json(stocksFromLikes);
+        } catch (error) {
+            res.json(error)
+        }
+
     }
 
     app.post('/users/likes/:sid', userLikesStock)
@@ -105,6 +119,7 @@ const LikesController = (app) => {
     app.put('/users/:uid/likes/:sid', userTogglesStockLikes)
     app.get('/stocks/:sid/likesCount', countHowManyLikesForStock)
     app.get('/users/:uid/likes/:sid', findUserLikesStock)
+    app.get('/users/:uid/likedStocks', findAllStocksLikedByUser)
     // app.put(updateLike)
 
     // /users/undefined/likes/639a8aa37a0972afb22c3c68
