@@ -26,6 +26,22 @@ const UsersController = (app) => {
     res.send({message:"No User"});
 
   };
+
+  const addBookmark = async(req,res)=>{
+    console.log("inside bookMark controller");
+    const email= req.body.email;
+    const bookMark= req.body.bookMark;
+   
+    const existingUser = await userDao.findUserByUsername(email);
+    if(existingUser)
+    {
+      await userDao.addBookMark(email,bookMark)
+      res.status(201).send({message:"Added Bookmark"});
+    }
+    else 
+    res.send({message:"No User"});
+  };
+
   const deleteUser = async (req, res) => {
     const userToDelete = req.params.uid;
     const status = await userDao.deleteUser(userToDelete);
@@ -93,6 +109,7 @@ const UsersController = (app) => {
   app.get("/users/:uid", findUserById);
   app.post("/users", createUser);
   app.put("/users/update", updateUser);
+  app.put("/users/addBookmark", addBookmark);
   app.delete("/users/:uid", deleteUser);
 
   app.post("/sign-up", register);

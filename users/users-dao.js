@@ -23,6 +23,14 @@ export const updateUser = async (email, userUpdates) =>
                 address:userUpdates.address,phoneNumber:userUpdates.phoneNumber,
                 dob:userUpdates.dob,gender:userUpdates.gender}});
 }
+
+export const addBookMark = async (email,bookMark) =>
+{
+    console.log("inside bookMark service");
+    await usersModel.updateOne({email},
+        {$push: { bookMarks: bookMark}});
+}
+   
  
 
 export const findUserById = (uid) =>
