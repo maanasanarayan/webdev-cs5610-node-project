@@ -90,7 +90,7 @@ const LikesController = (app) => {
 
         try {
             const response = await likesDao.countHowManyLikes(stockID);
-            return response
+            res.json(response);
         } catch (error) {
             res.json(error);
         }

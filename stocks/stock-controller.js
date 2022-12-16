@@ -7,7 +7,6 @@ const StocksController = (app) => {
     console.log("Entering create stock with req: ", req.body);
     const stock = req.body;
     const existingStock = await stockDao.findStockBySymbol(stock.symbol);
-
     if (existingStock) {
       console.log("Stock ID inside:", existingStock._id);
       res.send(existingStock);
