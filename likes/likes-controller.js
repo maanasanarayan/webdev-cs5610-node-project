@@ -31,7 +31,6 @@ const LikesController = (app) => {
 
     }
     const findStocksLikedByUser = async (req, res) => {
-
         try {
             const uid = req.params.uid
             const stocks = await likesDao.findStocksLikedByUser(uid)
@@ -39,8 +38,8 @@ const LikesController = (app) => {
         } catch (error) {
             res.json(error)
         }
-
     }
+
     const findUsersThatLikeStock = async (req, res) => {
 
         try {
