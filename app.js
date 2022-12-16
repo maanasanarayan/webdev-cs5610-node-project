@@ -6,11 +6,7 @@ import LikesController from "./likes/likes-controller.js";
 import UsersController from "./users/users-controller.js";
 import StocksController from "./stocks/stock-controller.js";
 import CommentsController from "./comments/comments-controller.js";
-<<<<<<< HEAD
 import BookMarksController from "./bookmarks/bookmarks-controller.js"
-=======
-import e from "express";
->>>>>>> 319bdde8f45ebd9d381c3ad1d323aa179c0db00a
 
 const options = {
   useNewUrlParser: true,
