@@ -57,7 +57,7 @@ const CommentsController = (app) => {
         const sid = req.params.sid;
         try {
             const response = await commentDao.countHowManyComments(sid);
-            return response
+            res.json(response)
         } catch (error) {
             res.error(error);
         }
