@@ -15,9 +15,15 @@ export const findAllUsers = async () =>
 export const deleteUser = async (uid) =>
     await usersModel.deleteOne({_id: uid})
 
-export const updateUser = async (uid, userUpdates) =>
-    await usersModel.updateOne({_id: uid},
-        {$set: userUpdates})
+export const updateUser = async (email, userUpdates) =>
+{
+    console.log("in update!");
+    await usersModel.updateOne({email},
+            {$set:{fname: userUpdates.fname,lname: userUpdates.lname,
+                address:userUpdates.address,phoneNumber:userUpdates.phoneNumber,
+                dob:userUpdates.dob,gender:userUpdates.gender}});
+}
+ 
 
 export const findUserById = (uid) =>
     usersModel.findById(uid, {password: false})
