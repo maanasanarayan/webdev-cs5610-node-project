@@ -102,7 +102,8 @@ const UsersController = (app) => {
       res.json(user);
       return;
     }
-    res.sendStatus(404);
+    console.log("Find userById request failed")
+    res.sendStatus(403);
   };
 
   app.get("/users", findAllUsers);
