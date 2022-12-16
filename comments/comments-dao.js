@@ -1,4 +1,6 @@
 import CommentModel from "./comments-model.js";
+import likesModel from "../likes/likes-model.js";
+import commentsModel from "./comments-model.js";
 
 
 export const getComments = async (sid) => {
@@ -54,3 +56,6 @@ export const deleteComment = async (uid, cid) => {
 
     return comm;
 }
+
+export const countHowManyComments = async (sid) =>
+    commentsModel.count({stock: sid});

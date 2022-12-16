@@ -1,14 +1,10 @@
 { "type": "module",
-  "name": "software-engineering-node",
+  "name": "webdev-cs5610-node-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "tsc --project ./",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run build",
-    "dev": "nodemon server.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
