@@ -5,6 +5,7 @@ import LikesController from "./likes/likes-controller.js";
 import UsersController from "./users/users-controller.js";
 import StockController from "./stocks/stock-controller.js";
 import CommentsController from "./comments/comments-controller.js";
+import BookMarksController from "./bookmarks/bookmarks-controller.js"
 
 const options = {
   useNewUrlParser: true,
@@ -29,5 +30,6 @@ StockController(app);
 LikesController(app);
 UsersController(app);
 CommentsController(app);
+BookMarksController(app);
 app.listen(4000);
 console.log("Listening at 4000");

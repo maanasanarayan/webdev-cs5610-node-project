@@ -10,6 +10,7 @@ const usersSchema = mongoose.Schema({
     phonenumber:String,
     dob:String,
     gender:String,
+    bookMarks:Array,
     role: {type: String, enum: ['INDUSTRY', 'TRADER', 'ADMIN']}
 }, {collection: 'users'})
 
